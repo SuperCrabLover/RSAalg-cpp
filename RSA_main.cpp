@@ -1,10 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <unistd.h>
 #include "RSA_functions.h"
+#define BUF_LEN 1024
 
-int main(void) {
-    long long p1 = 0, p2 = 0;
-    printf("Insert 2 prime numbers:\n");
+int main(int argc, char* argv[]) {
+		int iflag = 0;
+		char primes[BUF_LEN];
+		int c;
+   	long long p1, p2; 
+
+		while ((c = getopt (argc, argv, "hgi:")) != -1)
+		{
+			switch (c)
+			{
+				case 'h':
+					printf(" -i is for your own prime numbers, it should be followed by two numbers separated by '/', example: 13/47; \n -g is for generating prime numbers by the programm, it shouldn't be followed by anything; \n");
+					return 0;
+				case 'g':
+					//generatePrimes(&p1, &p2);
+					break;
+				case 'i':
+					strcpy(primes, optarg);
+					break;
+				case '?':
+					fprintf(stderr, "Error: unknown parameter!\n");
+					exit(-1);
+					break;
+			}
+		}
+		printf("Insert 2 prime numbers:\n");
     if (scanf("%lld %lld", &p1, &p2) != 2) {
         fprintf(stderr, "Error: incorrect input arguments\n");
         exit(-1);
