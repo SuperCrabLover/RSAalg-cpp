@@ -1,6 +1,7 @@
 #include "RSA_functions.h"
 
-tuple<int64_t, int64_t, int64_t> xGCD(int64_t a, int64_t b, int64_t x, int64_t y) {
+tuple<int64_t, int64_t, int64_t> xGCD(int64_t a, int64_t b, int64_t x, int64_t y)
+{
     tuple<int64_t, int64_t, int64_t> res;
     if (b == 0) {
         x = 1;
@@ -16,12 +17,14 @@ tuple<int64_t, int64_t, int64_t> xGCD(int64_t a, int64_t b, int64_t x, int64_t y
     return res;
 }
 
-long long modexp(long long x, long long y, long long N) {
-  if (y == 0)
-      return 1;
-  long long z = modexp(x, y / 2, N);
-  if (y % 2 == 0)
-    return (z*z) % N;
-  else
-    return (x*z*z) % N;
+int64_t modexp (int64_t x, int64_t y, int64_t N)
+{
+    int64_t res = 1;
+    while (y) {
+        if (y & 1)
+            res = (res * x) % N;
+        x = (x * x) % N;
+        y >>= 1;
+    }
+    return res;
 }
