@@ -6,6 +6,7 @@
 #include "RSA_functions.h"
 #define BUF_LEN 1024
 
+<<<<<<< HEAD
 int main(int argc, char* argv[]) {
 		int iflag = 0;
 		char primes[BUF_LEN];
@@ -32,6 +33,13 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		printf("Insert 2 prime numbers:\n");
+=======
+#define MSG 14
+
+int main(void) {
+    long long p1 = 0, p2 = 0;
+    printf("Insert 2 prime numbers:\n");
+>>>>>>> eb970a04cb80070467f80b11602d2c265185f367
     if (scanf("%lld %lld", &p1, &p2) != 2) {
         fprintf(stderr, "Error: incorrect input arguments\n");
         exit(-1);
@@ -46,16 +54,16 @@ int main(int argc, char* argv[]) {
 	long long e;
 	scanf("%lld", &e);
 	
-	long long d, x, y;
-	long long g = xGCD (e, phi, x, y);
+	long long d, x = 0, y = 0;
+    auto [new_x, new_y, g] = xGCD (e, phi, x, y);
     
     if (g != 1) {
         printf("no solution\n");
         return 0;
     }
 	else {
-		x = (x % phi + phi) % phi;
-		d = x;
+		new_x = (new_x % phi + phi) % phi;
+		d = new_x;
 		printf("oposite for e: %lld in ring phi: %lld is: %lld\n", e, phi, d);
 	}
     
