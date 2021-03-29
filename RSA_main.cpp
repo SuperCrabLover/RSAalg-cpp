@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "RSA_functions.h"
 
+#define MSG 14
+
 int main(void) {
     long long p1 = 0, p2 = 0;
     printf("Insert 2 prime numbers:\n");
@@ -19,16 +21,16 @@ int main(void) {
 	long long e;
 	scanf("%lld", &e);
 	
-	long long d, x, y;
-	long long g = xGCD (e, phi, x, y);
+	long long d, x = 0, y = 0;
+    auto [new_x, new_y, g] = xGCD (e, phi, x, y);
     
     if (g != 1) {
         printf("no solution\n");
         return 0;
     }
 	else {
-		x = (x % phi + phi) % phi;
-		d = x;
+		new_x = (new_x % phi + phi) % phi;
+		d = new_x;
 		printf("oposite for e: %lld in ring phi: %lld is: %lld\n", e, phi, d);
 	}
     

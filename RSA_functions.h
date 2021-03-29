@@ -1,6 +1,8 @@
 #include <math.h>
-#define MSG 14
+#include <tuple>
 
-long long xGCD(long long a, long long b, long long &x, long long &y);
+using namespace std;
 
-long long modexp(long long x, long long y, long long N);
+tuple<int64_t, int64_t, int64_t> xGCD(int64_t a, int64_t b, int64_t x, int64_t y);
+
+int64_t modexp(int64_t x, int64_t y, int64_t N);
