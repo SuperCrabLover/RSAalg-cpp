@@ -11,7 +11,11 @@ int main(int argc, char* argv[])
 {
     char primes[BUF_LEN];
     int c;
-    long long p1, p2;
+    long long p1 = 0, p2 = 0;
+    char sp1[BUF_LEN];
+   	char sp2[BUF_LEN];
+		char switcher = 0;
+		int i, j = 0;
     while ((c = getopt (argc, argv, "hgi:")) != -1)
         {
         switch (c)
@@ -24,20 +28,40 @@ int main(int argc, char* argv[])
                 break;
             case 'i':
                 strcpy(primes, optarg);
-                break;
-            case '?':
+								for (i = 0; primes[i] != '\0'; i++)
+								{
+									if (switcher == 0 && primes[i] != '/')
+									{
+											sp1[i] = primes[i];
+									}
+									else if ( primes[i] == '/' )
+									{
+										sp1[i] = '\0';
+										switcher = 1;
+									}
+									else if (switcher == 1)
+									{
+										sp2[j] = primes[i];
+										j++;
+									}
+								}
+								sp2[j] = '\0';
+								p1 = atoll(sp1);
+								p2 = atoll(sp2);
+								break;
+            
+						case '?':
                 fprintf(stderr, "Error: unknown parameter!\n");
                 exit(-1);
             }
         }
     
-        printf("Insert 2 prime numbers:\n");
-        if (scanf("%lld %lld", &p1, &p2) != 2)
-        {
-            fprintf(stderr, "Error: incorrect input arguments\n");
-            exit(-1);
-        }
-        long long n = p1 * p2;
+        if( p1 == 0 || p2 == 0)
+				{
+					printf("Incorrect prime numbers !\n");
+					return 0;
+				}
+				long long n = p1 * p2;
 
         printf("n is : %lld\n", n);
         long long phi = (p1 - 1) * (p2 - 1);
