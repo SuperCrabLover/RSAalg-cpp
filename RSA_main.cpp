@@ -65,13 +65,13 @@ int main(int argc, char* argv[])
         
         int msg = MSG;
         printf("msg %d\n", msg);
-        printf("msg^e %lld\n", modexp(msg, e, n));
+        printf("msg^e %ld\n", modexp(msg, e, n));
 
         int64_t enc = modexp(msg, e, n);
-        printf("Encrypted is %lld\n", enc);
+        printf("Encrypted is %ld\n", enc);
 
         int64_t dec = modexp(enc, d, n);
 
-        printf("Decrypted is %lld\n", dec);
+        printf("Decrypted is %ld\n", dec);
         return 0;
 }
